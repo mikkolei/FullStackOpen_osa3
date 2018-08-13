@@ -2,4 +2,4 @@
 
 Heroku:
 
-(https://fullstackvk3.herokuapp.com)[https://fullstackvk3.herokuapp.com]
+[https://fullstackvk3.herokuapp.com](https://fullstackvk3.herokuapp.com)
