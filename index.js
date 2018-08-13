@@ -1,8 +1,16 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const cors = require('cors')
 
 app.use(bodyParser.json())
+app.use(morgan(':method :url :type :status :res[content-length] - :response-time ms'))
+app.use(cors())
+
+morgan.token('type', (req, res) => { 
+    return JSON.stringify(req.body) 
+})
 
 let persons = [
     {
@@ -71,7 +79,7 @@ app.post('/api/persons', (req, res) => {
     if (body.name === undefined || body.number === undefined) {
       return res.status(400).json({error: 'name or number missing'})
     }
-    
+
     const names = persons.map(p => p.name)
     if (names.includes(body.name)) {
         return res.status(400).json({error: 'name must be unique'})
@@ -88,7 +96,7 @@ app.post('/api/persons', (req, res) => {
     res.json(newPerson)
 })
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
