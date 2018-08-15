@@ -10,8 +10,8 @@ app.use(morgan(':method :url :type :status :res[content-length] - :response-time
 app.use(cors())
 app.use(express.static('build'))
 
-morgan.token('type', (req, res) => { 
-    return JSON.stringify(req.body) 
+morgan.token('type', (req, res) => {
+    return JSON.stringify(req.body)
 })
 
 const formatPerson = (person) => {
@@ -95,14 +95,14 @@ app.put('/api/persons/:id', (req, res) => {
 
 app.post('/api/persons', (req, res) => {
     const body = req.body
-  
+
     if (body.name === (undefined || "") || body.number === (undefined || "")) {
-      return res.status(400).json({ error: 'name or number missing' })
+        return res.status(400).json({ error: 'name or number missing' })
     }
-  
+
     const newPerson = new Person({
-      name: body.name,
-      number: body.number
+        name: body.name,
+        number: body.number
     })
 
     newPerson
@@ -117,5 +117,5 @@ app.post('/api/persons', (req, res) => {
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+    console.log(`Server running on port ${PORT}`)
 })
